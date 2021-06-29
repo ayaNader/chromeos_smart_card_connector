@@ -38,7 +38,8 @@ const openHelpElement = /** @type {!Element} */ (goog.dom.getElement(
  */
 function openHelpClickListener(event) {
   event.preventDefault();
-  chrome.browser.openTab({url: HELP_WINDOW_URL});
+  chrome.windows.create({url: HELP_WINDOW_URL});
+  // chrome.browser.openTab({url: HELP_WINDOW_URL});
 }
 
 GSC.ConnectorApp.Window.HelpShowing.initialize = function() {

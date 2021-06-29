@@ -52,7 +52,7 @@ var logger = GSC.Logging.getScopedLogger('ConnectorApp.MainWindow');
  * @type {!Element}
  * @const
  */
-var appListElement = /** @type {!Element} */ (goog.dom.getElement('app-list'));
+// var appListElement = /** @type {!Element} */ (goog.dom.getElement('app-list'));
 
 /**
  * @const
@@ -73,18 +73,18 @@ var lastKnownAppsPromise = null;
 function updateAppView(knownAppsPromise, appIds, knownApps) {
   if (knownAppsPromise !== lastKnownAppsPromise) return false;
 
-  GSC.Logging.checkWithLogger(logger, appListElement !== null);
-  goog.asserts.assert(appListElement);
+  // GSC.Logging.checkWithLogger(logger, appListElement !== null);
+  // goog.asserts.assert(appListElement);
 
-  goog.dom.removeChildren(appListElement);
+  // goog.dom.removeChildren(appListElement);
 
-  for (var i = 0; i < appIds.length; i++) {
-    var text = knownApps && knownApps[i] ?
-               knownApps[i].name :
-               '<' + appIds[i] + '>';
-    var newElement = goog.dom.createDom('li', undefined, text);
-    goog.dom.append(appListElement, newElement);
-  }
+  // for (var i = 0; i < appIds.length; i++) {
+  //   var text = knownApps && knownApps[i] ?
+  //              knownApps[i].name :
+  //              '<' + appIds[i] + '>';
+  //   var newElement = goog.dom.createDom('li', undefined, text);
+  //   goog.dom.append(appListElement, newElement);
+  // }
 
   return true;
 }
@@ -92,35 +92,35 @@ function updateAppView(knownAppsPromise, appIds, knownApps) {
 /**
  * @param {!Array.<string>} appListArg
  */
-function onUpdateListener(appListArg) {
-  var appList = goog.array.clone(appListArg);
-  goog.array.sort(appList);
-  logger.fine('Application list updated, refreshing the view. ' +
-              'New list of id\'s: ' + GSC.DebugDump.dump(appList));
+// function onUpdateListener(appListArg) {
+//   var appList = goog.array.clone(appListArg);
+//   goog.array.sort(appList);
+//   logger.fine('Application list updated, refreshing the view. ' +
+//               'New list of id\'s: ' + GSC.DebugDump.dump(appList));
 
-  var knownAppsPromise = knownAppsRegistry.tryGetByIds(appList);
-  lastKnownAppsPromise = knownAppsPromise;
+//   var knownAppsPromise = knownAppsRegistry.tryGetByIds(appList);
+//   lastKnownAppsPromise = knownAppsPromise;
 
-  knownAppsPromise.then(
-      function(knownApps) {
-        updateAppView(knownAppsPromise, appList, knownApps);
-      },
-      function(error) {
-        if (!updateAppView(knownAppsPromise, appList, null)) return;
+//   knownAppsPromise.then(
+//       function(knownApps) {
+//         updateAppView(knownAppsPromise, appList, knownApps);
+//       },
+//       function(error) {
+//         if (!updateAppView(knownAppsPromise, appList, null)) return;
 
-        logger.warning('Couldn\'t resolve appList: ' + error);
-      });
-}
+//         logger.warning('Couldn\'t resolve appList: ' + error);
+//       });
+// }
 
-GSC.ConnectorApp.Window.AppsDisplaying.initialize = function() {
-  logger.fine('Registering listener on connected apps update');
-  // FIXME(emaxx): Do unsubscription too.
-  // FIXME(emaxx): Use GSC.ObjectHelpers.extractKey to ensure that the expected
-  // object is passed to the window.
-  var data = GSC.PopupWindow.Client.getData()['clientAppListUpdateSubscriber'];
-  var clientAppListUpdateSubscriber =
-      /**@type {function(function(!Array.<string>))} */ (data);
-  clientAppListUpdateSubscriber(onUpdateListener);
-};
+// GSC.ConnectorApp.Window.AppsDisplaying.initialize = function() {
+//   logger.fine('Registering listener on connected apps update');
+//   // FIXME(emaxx): Do unsubscription too.
+//   // FIXME(emaxx): Use GSC.ObjectHelpers.extractKey to ensure that the expected
+//   // object is passed to the window.
+//   var data = GSC.PopupWindow.Client.getData()['clientAppListUpdateSubscriber'];
+//   var clientAppListUpdateSubscriber =
+//       /**@type {function(function(!Array.<string>))} */ (data);
+//   clientAppListUpdateSubscriber(onUpdateListener);
+// };
 
 });  // goog.scope

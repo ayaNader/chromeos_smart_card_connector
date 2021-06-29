@@ -122,7 +122,7 @@ var readerTracker = new GSC.PcscLiteServer.ReaderTracker(
 
 executableModule.startLoading();
 
-chrome.app.runtime.onLaunched.addListener(launchedListener);
+// chrome.app.runtime.onLaunched.addListener(launchedListener);
 
 chrome.runtime.onConnect.addListener(connectionListener);
 chrome.runtime.onConnectExternal.addListener(externalConnectionListener);
@@ -139,15 +139,15 @@ function executableModuleDisposedListener() {
   }
 }
 
-/**
- * Called when the onLaunched event is received (that is, when the user clicks
- * on the app in the Chrome OS app launcher).
- */
-function launchedListener() {
-  logger.fine('Received onLaunched event, opening window...');
-  GSC.ConnectorApp.Background.MainWindowManaging.openWindowDueToUserRequest(
-      makeDataForMainWindow());
-}
+// /**
+//  * Called when the onLaunched event is received (that is, when the user clicks
+//  * on the app in the Chrome OS app launcher).
+//  */
+// function launchedListener() {
+//   logger.fine('Received onLaunched event, opening window...');
+//   GSC.ConnectorApp.Background.MainWindowManaging.openWindowDueToUserRequest(
+//       makeDataForMainWindow());
+// }
 
 /**
  * Called when the onConnect event is received.

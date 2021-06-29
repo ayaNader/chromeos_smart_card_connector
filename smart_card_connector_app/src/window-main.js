@@ -53,14 +53,14 @@ goog.events.listen(
     closeWindowClickListener);
 
 GSC.ConnectorApp.Window.AboutShowing.initialize();
-GSC.ConnectorApp.Window.AppsDisplaying.initialize();
-GSC.ConnectorApp.Window.DevicesDisplaying.initialize();
+// GSC.ConnectorApp.Window.AppsDisplaying.initialize();
+// GSC.ConnectorApp.Window.DevicesDisplaying.initialize();
 GSC.ConnectorApp.Window.HelpShowing.initialize();
 GSC.ConnectorApp.Window.LogsExporting.initialize();
 
 GSC.I18n.adjustAllElementsTranslation();
 
-GSC.PopupWindow.Client.showWindow();
+// GSC.PopupWindow.Client.showWindow();
 
 displayNonChromeOsWarningIfNeeded();
 
