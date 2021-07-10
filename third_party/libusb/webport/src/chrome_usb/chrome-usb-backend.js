@@ -57,7 +57,7 @@ GSC.Libusb.ChromeUsbBackend = function(naclModuleMessageChannel) {
   // itself being owned by the message channel.
   new GSC.RequestReceiver(
       REQUESTER_NAME, naclModuleMessageChannel, this.handleRequest_.bind(this));
-  this.startObservingDevices_();
+  // this.startObservingDevices_();
 
   /** 
    * @type {!Array<function(string, !Array): !Array>}
@@ -122,45 +122,45 @@ ChromeUsbBackend.prototype.startProcessingEvents = function() {
 };
 
 /** @private */
-ChromeUsbBackend.prototype.startObservingDevices_ = function() {
-  chrome.usb.onDeviceAdded.addListener(this.deviceAddedListener_.bind(this));
-  chrome.usb.onDeviceRemoved.addListener(
-      this.deviceRemovedListener_.bind(this));
-  this.logCurrentDevices_();
-};
+// ChromeUsbBackend.prototype.startObservingDevices_ = function() {
+//   chrome.usb.onDeviceAdded.addListener(this.deviceAddedListener_.bind(this));
+//   chrome.usb.onDeviceRemoved.addListener(
+//       this.deviceRemovedListener_.bind(this));
+//   this.logCurrentDevices_();
+// };
 
 /**
  * @param {!chrome.usb.Device} device
  * @private
  */
-ChromeUsbBackend.prototype.deviceAddedListener_ = function(device) {
-  this.logger.fine('A USB device was added: ' + GSC.DebugDump.dump(device));
-  this.logCurrentDevices_();
-};
+// ChromeUsbBackend.prototype.deviceAddedListener_ = function(device) {
+//   this.logger.fine('A USB device was added: ' + GSC.DebugDump.dump(device));
+//   this.logCurrentDevices_();
+// };
 
 /**
  * @param {!chrome.usb.Device} device
  * @private
  */
-ChromeUsbBackend.prototype.deviceRemovedListener_ = function(device) {
-  this.logger.fine('A USB device was removed: ' + GSC.DebugDump.dump(device));
-  this.logCurrentDevices_();
-};
+// ChromeUsbBackend.prototype.deviceRemovedListener_ = function(device) {
+//   this.logger.fine('A USB device was removed: ' + GSC.DebugDump.dump(device));
+//   this.logCurrentDevices_();
+// };
 
 /** @private */
-ChromeUsbBackend.prototype.logCurrentDevices_ = function() {
-  chrome.usb.getDevices({}, this.logDevices_.bind(this));
-};
+// ChromeUsbBackend.prototype.logCurrentDevices_ = function() {
+//   chrome.usb.getDevices({}, this.logDevices_.bind(this));
+// };
 
 /**
  * @param {!Array.<!chrome.usb.Device>} devices
  * @private
  */
-ChromeUsbBackend.prototype.logDevices_ = function(devices) {
-  goog.array.sortByKey(devices, function(device) { return device.device; });
-  this.logger.info(devices.length + ' USB device(s) available: ' +
-                   GSC.DebugDump.dump(devices));
-};
+// ChromeUsbBackend.prototype.logDevices_ = function(devices) {
+//   goog.array.sortByKey(devices, function(device) { return device.device; });
+//   this.logger.info(devices.length + ' USB device(s) available: ' +
+//                    GSC.DebugDump.dump(devices));
+// };
 
 /**
  * @param {!Object} payload
